@@ -10,7 +10,7 @@ import SwiftUI
 struct Repo: Identifiable, Codable { // it is Identifiable because we need to use it in a List
 // Codable to decode JSON data
 // Identifiable and Codable are both type protocols, we can declare multiple
-    let id = UUID()
+    var id = UUID()
     let name: String
     let stargazers_count: Int
     let language: String?
