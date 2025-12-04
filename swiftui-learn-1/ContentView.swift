@@ -10,7 +10,7 @@ import SwiftUI
 struct Repo: Identifiable, Codable { // it is Identifiable because we need to use it in a List
 // Codable to decode JSON data
 // Identifiable and Codable are both type protocols, we can declare multiple
-    var id = UUID()
+    let id: Int
     let name: String
     let stargazers_count: Int
     let language: String?
@@ -75,6 +75,7 @@ struct ContentView: View {
             let (data, _) = try await URLSession.shared.data(for: request)
             let allRepos = try JSONDecoder().decode([Repo].self, from: data)
             repos = allRepos.filter { !$0.fork }
+            .sorted { $0.stargazers_count > $1.stargazers_count }
         } catch {
             print("Error: \(error)")
         }
